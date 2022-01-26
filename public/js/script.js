@@ -7,7 +7,7 @@ const p2 = document.querySelector('#p2');
 function getWeather(location){
     p1.textContent='Waiting...';
     p2.textContent='';
-    fetch('http://localhost:3030/weather?address='+location).then((res)=>{
+    fetch('/weather?address='+location).then((res)=>{
     res.json().then((data)=>{
        if(data.error){
         p1.textContent=data.error;  

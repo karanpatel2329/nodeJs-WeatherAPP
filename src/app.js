@@ -2,6 +2,9 @@ const express = require('express');
 const path = require('path')
 const hbs = require('hbs');
 const app = express();
+const port = process.env.PORT || 3030
+
+
 const geocoding = require('./utils/geocode');
 const forecast = require('./utils/forecast');
 staticPath = path.join(__dirname,"../public")
@@ -38,12 +41,14 @@ app.get('/help',(req,res)=>{
         name:"Karan"
     });
 });
+
 app.get('/help/*',(req,res)=>{
     res.render('404Page',{
         name:'Karan',
         content:'404 Help Not Found'
     })
 });
+
 app.get('/weather',async(req,res)=>{
      if(!req.query.address){
         return res.send({
@@ -66,14 +71,8 @@ app.get('/weather',async(req,res)=>{
         });
     });
     
-})
-
-app.get('/products',(req,res)=>{
-    console.log(req.query.year)
-    res.send({
-        product:[],
-    })
 });
+
 app.get('*',(req,res)=>{
     res.render('404Page',{
         name:'Karan',
@@ -82,6 +81,6 @@ app.get('*',(req,res)=>{
 })
 
 
-app.listen(3030,()=>{
-    console.log('Server Up and Running');
+app.listen(port,()=>{
+    console.log('Server Up and Running at '+port);
 });
